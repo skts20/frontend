@@ -9,6 +9,7 @@ defmodule LiveviewChat.Message do
   schema "messages" do
     field :message, :string
     field :name, :string
+    field :type, :string
 
     timestamps()
   end
@@ -16,7 +17,7 @@ defmodule LiveviewChat.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:name, :message])
+    |> cast(attrs, [:name, :message, :type])
     |> validate_required([:name, :message])
     |> validate_length(:message, min: 2)
   end

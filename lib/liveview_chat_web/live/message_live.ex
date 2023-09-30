@@ -1,4 +1,5 @@
 defmodule LiveviewChatWeb.MessageLive do
+  require Logger
   use LiveviewChatWeb, :live_view
   alias LiveviewChat.Message
   alias LiveviewChat.Presence
@@ -23,12 +24,7 @@ defmodule LiveviewChatWeb.MessageLive do
       Phoenix.PubSub.subscribe(PubSub, @presence_topic)
     end
 
-    changeset =
-      if Map.has_key?(socket.assigns, :person) do
-        Message.changeset(%Message{}, %{"name" => socket.assigns.person.givenName})
-      else
-        Message.changeset(%Message{}, %{})
-      end
+    changeset = Message.changeset(%Message{}, %{"name" => "Użytkownik"})
 
     messages = Message.list_messages() |> Enum.reverse()
 
@@ -50,6 +46,11 @@ defmodule LiveviewChatWeb.MessageLive do
         {:noreply, assign(socket, changeset: changeset)}
 
       :ok ->
+        {action, type} = case params["type"] do
+          "Tłumacz" -> {LiveviewChat.BackendClient.translate(params["message"]), "sql"}
+          "Wykonaj" -> {LiveviewChat.BackendClient.execute(params["message"]), "table"}
+        end
+        :ok = Message.create_message(%{"name" => "System", "message" => action, "type" => type})
         changeset = Message.changeset(%Message{}, %{"name" => params["name"]})
         {:noreply, assign(socket, changeset: changeset)}
     end

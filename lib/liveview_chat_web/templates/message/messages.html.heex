@@ -5,28 +5,25 @@
         <%= message.inserted_at %>
       </small>
       <b><%= message.name %>:</b>
-      <%= message.message %>
+      <%= if message.type == "table" do %>
+        <%= raw(message.message) %>
+      <% else %>
+        <%= message.message %>
+      <% end %>
     </li>
   <% end %>
 </ul>
 
 <footer class="fixed bottom-0 w-full bg-slate-300 pb-2 px-5 pt-2">
   <.form :let={f} for={@changeset} id="form" phx-submit="new_message" phx-hook="Form">
-    <%= if @loggedin do %>
-      <%= text_input(f, :name, id: "name", value: @person.givenName, class: "hidden") %>
-    <% else %>
-      <%= text_input(f, :name,
-        id: "name",
-        placeholder: "Name",
-        autofocus: "true",
-        class: "border p-2 w-9/12 mb-2 mt-2 mr2"
-      ) %>
-      <span class="italic text-2xl ml-4">or</span>
-      <span class="bg-green-600 text-white rounded-xl px-4 py-2 mb-2 mt-3 float-right">
-        <%= link("Login", to: "/login") %>
-      </span>
-      <%= error_tag(f, :name) %>
-    <% end %>
+    <%= text_input(f, :name, id: "name", class: "hidden") %>
+    <%= select(f, :db,
+      get_dbs()
+    ) %>
+
+    <%= select(f, :type,
+      ["Tłumacz", "Wykonaj"]
+    ) %>
 
     <%= text_input(f, :message,
       id: "msg",
@@ -36,7 +33,7 @@
     <p class=" text-amber-600">
       <%= error_tag(f, :message) %>
     </p>
-    <%= submit("Send", class: "bg-sky-600 text-white rounded-xl px-4 py-2 mt-2 float-right") %>
+    <%= submit("Wyślij", class: "bg-sky-600 text-white rounded-xl px-4 py-2 mt-2 float-right") %>
   </.form>
 </footer>
 <!-- ignore this ... -->

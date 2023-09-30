@@ -14,34 +14,7 @@
   <body>
     <header class="bg-slate-800 w-full min-h-[15%] pt-5 pb-1 mb-2">
       <section>
-        <nav>
-          <div class="text-white width-[10%] float-left ml-3 -mt-5 align-middle">
-          <b>People in Chat:</b>
-          <ul>
-            <%= for name <- @presence do %>
-              <li>
-                <%= name %>
-              </li>
-            <% end %>
-          </ul>
-          </div>
-
-          <ul class="float-right mr-3">
-            <%= if @loggedin do %>
-              <li>
-                <img width="42px" src={@person.picture} class="-mt-3"/>
-              </li>
-              <li class="text-white">
-                <%= link "logout", to: "/logout" %>
-              </li>
-            <% else %>
-              <li class="bg-green-600 text-white rounded-xl px-4 py-2 w-full mb-2 font-bold">
-                <%= link "Login", to: "/login" %>
-              </li>
-            <% end %>
-          </ul>
-        </nav>
-        <h1 class="text-3xl mb-4 text-center font-mono text-white">LiveView Chat Example</h1>
+        <h1 class="text-3xl mb-4 text-center font-mono text-white">Talk to your data</h1>
       </section>
     </header>
     <%= @inner_content %>

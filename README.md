@@ -222,7 +222,7 @@ update the contents of the `<body>` to:
 <body>
   <header>
     <section class="container">
-      <h1>LiveView Chat Example</h1>
+      <h1>Talk to your data</h1>
     </section>
   </header>
   <%= @inner_content %>
@@ -277,7 +277,7 @@ Generated liveview_chat app
      left:  "<!DOCTYPE html><html lang=\"en\"> <head> <meta charset=\"utf-8\"> <meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge\">
      <title data-suffix=\" · Phoenix Framework\">LiveviewChat · Phoenix Framework</title> <link phx-track-static rel=\"stylesheet\" href=\"/assets/app.css\">    <script defer phx-track-static type=\"text/javascript\" src=\"/assets/app.js\"></script>  </head>  
      <body> <header> <section class=\"container\"> 
-     <h1>LiveView Chat Example</h1></section> </header>
+     <h1>Talk to your data</h1></section> </header>
      <h1>LiveView Message Page</h1></main></div>  </body></html>"
      right: "Welcome to Phoenix!"
      stacktrace:
@@ -1115,7 +1115,7 @@ to display a `login` (or `logout`) link:
           <% end %>
         </ul>
       </nav>
-      <h1>LiveView Chat Example</h1>
+      <h1>Talk to your data</h1>
     </section>
   </header>
   <%= @inner_content %>
@@ -1421,7 +1421,7 @@ with:
             <% end %>
           </ul>
         </nav>
-        <h1 class="text-3xl mb-4 text-center font-mono text-white">LiveView Chat Example</h1>
+        <h1 class="text-3xl mb-4 text-center font-mono text-white">Talk to your data</h1>
       </section>
     </header>
     <%= @inner_content %>
