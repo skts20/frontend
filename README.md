@@ -8,4 +8,5 @@ Based on https://github.com/dwyl/phoenix-liveview-chat-example
 * naprawić setup dockerowy (bez konteneryzacji działa)
 
 ## Uruchomienie
-`docker compose up` lub `mix phx.server` (wymaga instalacji Erlanga i Elixira)
+ * dev: `mix ecto.setup & mix phx.server` (wymaga instalacji Erlanga i Elixira oraz uruchomionej instancji postgresa na localhost)
+ * prod: `docker compose up`
