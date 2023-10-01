@@ -1,16 +1,3 @@
-# Find eligible builder and runner images on Docker Hub. We use Ubuntu/Debian
-# instead of Alpine to avoid DNS resolution issues in production.
-#
-# https://hub.docker.com/r/hexpm/elixir/tags?page=1&name=ubuntu
-# https://hub.docker.com/_/ubuntu?tab=tags
-#
-# This file is based on these images:
-#
-#   - https://hub.docker.com/r/hexpm/elixir/tags - for the build image
-#   - https://hub.docker.com/_/debian?tab=tags&page=1&name=bullseye-20220801-slim - for the release image
-#   - https://pkgs.org/ - resource for finding needed packages
-#   - Ex: hexpm/elixir:1.14.1-erlang-25.1.1-debian-bullseye-20220801-slim
-#
 ARG ELIXIR_VERSION=1.14.1
 ARG OTP_VERSION=25.1.1
 ARG DEBIAN_VERSION=bullseye-20220801-slim
@@ -89,7 +76,3 @@ COPY --from=builder --chown=nobody:root /app/_build/${MIX_ENV}/rel/liveview_chat
 USER nobody
 
 CMD ["/app/bin/server"]
-
-# Appended by flyctl
-ENV ECTO_IPV6 true
-ENV ERL_AFLAGS "-proto_dist inet6_tcp"

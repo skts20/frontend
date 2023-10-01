@@ -11,6 +11,22 @@ services:
       - '5432:5432'
     volumes:
       - db:/var/lib/postgresql/data
+    networks: ['mynetwork']
+  frontend:
+    depends_on:
+      - db
+    image: skts20/frontend:0.4.0
+    restart: always
+    environment:
+      - DATABASE_USER=postgres
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_URL=ecto://postgres:postgres@db/liveview_chat_dev
+      - SECRET_KEY_BASE="/1qobjXlKfQB+gvgs4g/YKb1jZI3qSXSryovFXgGfYfmbAAdncmASNw/XLP6pHbx"
+    networks: ['mynetwork']
+    ports:
+      -  '4000:4000'
+networks: 
+  mynetwork: {}
 volumes:
   db:
     driver: local
